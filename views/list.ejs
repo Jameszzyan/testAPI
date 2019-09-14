@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>阿里百秀-发现生活，发现美!奇趣事、潮科技、会生活、美奇迹</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/vendors/font-awesome/css/font-awesome.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- 引入头部（左侧边栏） -->
+    <%- include("./layouts/headers.ejs"); %>
+    <!-- 引入右侧边栏 -->
+    <%- include("./layouts/aside.ejs"); %>
+    <div class="content">
+      <!-- 使用后端渲染list页面主要内容 -->
+      <div class="panel new">
+        <h3><%=head%></h3>
+        <div class="entry">
+          <% for(var i = 0; i < content.length; i++) { %>
+          <div class="head">
+            <a href="javascript:;"><%=content[i].title%></a>
+          </div>
+          <div class="main">
+            <p class="info"><%=content[i].username%> 发表于 <%=content[i].write_time%></p>
+            <p class="brief">
+              <%=content[i].content%>
+            </p>
+            <p class="extra">
+              <span class="reading">阅读(<%=content[i].readingQuantity%>)</span>
+              <span class="comment">评论(<%=content[i].commentQuantity%>)</span>
+              <a href="javascript:;" class="like">
+                <i class="fa fa-thumbs-up"></i>
+                <span>赞(<%=content[i].likeQuantity%>)</span>
+              </a>
+              <a href="javascript:;" class="tags">
+                分类：<span><%=head%></span>
+              </a>
+            </p>
+            <a href="javascript:;" class="thumb">
+              <img src="<%=content[i].image%>" alt="">
+            </a>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <!-- 引入页脚部分 -->
+    <%- include("./layouts/footer.ejs") %>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<div class="aside">
+  <div class="widgets">
+    <h4>搜索</h4>
+    <div class="body search">
+      <form>
+        <input type="text" class="keys" placeholder="输入关键字">
+        <input type="submit" class="btn" value="搜索">
+      </form>
+    </div>
+  </div>
+  <div class="widgets">
+    <h4>随机推荐</h4>
+    <ul class="body random">
+      <!-- 利用ejs后端模板渲染随机推荐栏 -->
+      <% for(var i = 0; i < recommend.length; i++) { %>
+      <li>
+        <a href="javascript:;">
+          <p class="title"><%=recommend[i].title%></p>
+          <p class="reading">阅读(<%=recommend[i].readingQuantity%>)&nbsp;&nbsp;&nbsp;点赞(<%=recommend[i].likeQuantity%>)
+          </p>
+          <div class="pic">
+            <img src="<%=recommend[i].image%>" alt="">
+          </div>
+        </a>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+  <div class="widgets">
+    <h4>最新评论</h4>
+    <ul class="body discuz">
+      <!-- 使用template模板渲染评论区内容 -->
+    </ul>
+  </div>
+</div>
+<script type="text/template" id="comment">
+  {{each result as val key}}
+  <li>
+    <a href="javascript:;">
+      <div class="avatar">
+        <img src="{{val.avatar}}" alt="">
+      </div>
+      <div class="txt">
+        <p>
+          <span>{{val.author}}</span>({{val.createdTime}})说:
+        </p>
+        <p>{{val.content}}</p>
+      </div>
+    </a>
+  </li>
+  {{/each}}
+</script>
+<script src="/assets/js/aside_comment.js"></script>

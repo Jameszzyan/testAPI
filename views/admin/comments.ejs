@@ -1,0 +1,74 @@
+<%- include('./layouts/admin_header.ejs'); %>
+
+<div class="main">
+  <%- include('./layouts/admin_navbar.ejs'); %>
+  <div class="container-fluid">
+    <div class="page-title">
+      <h1>所有评论</h1>
+    </div>
+    <!-- 有错误信息时展示 -->
+    <!-- <div class="alert alert-danger">
+        <strong>错误！</strong>发生XXX错误
+      </div> -->
+    <div class="page-action">
+      <!-- show when multiple checked -->
+      <div class="btn-batch">
+        <button class="btn btn-info btn-sm">批量批准</button>
+        <button class="btn btn-warning btn-sm">批量拒绝</button>
+        <button class="btn btn-danger btn-sm">批量删除</button>
+      </div>
+      <ul class="pagination pagination-sm pull-right" style="float:right">
+        <li><a href="#">上一页</a></li>
+        <li><a href="#">下一页</a></li>
+      </ul>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="text-center" width="40"><input type="checkbox"></th>
+          <th>作者</th>
+          <th>评论</th>
+          <th>评论在</th>
+          <th>提交于</th>
+          <th>状态</th>
+          <th class="text-center" width="100">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<%- include('./layouts/admin_aside.ejs'); %>
+<script type="text/template" id="commentList">
+  {{each result}}
+  <tr class="danger">
+    <td class="text-center"><input data-id="{{$value.comments_id}} "type="checkbox"></td>
+    <td>{{$value.author}}</td>
+    <td>{{$value.content}}</td>
+    <td>{{$value.alias}}</td>
+    <td>{{$value.createdTime}}</td>
+    {{if $value.status == "approved" }}
+    <td>批准</td>
+    {{/if}}
+    {{if $value.status == "held" }}
+    <td>未批准</td>
+    {{/if}}
+    {{if $value.status == "rejected" }}
+    <td>拒绝</td>
+    {{/if}}
+    <td class="text-center" style="width:150px;">
+      <a data-id="{{$value.comments_id}}" href="javascript:;" class="btn btn-info btn-xs">批准</a>
+      <a data-id="{{$value.comments_id}}" href="javascript:;" class="btn btn-reject btn-xs" style="color:white;background-color:green;border-color:green">拒绝</a>
+      <a data-id="{{$value.comments_id}}" href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+    </td>
+  </tr>
+  {{/each}}
+</script>
+<script src="/assets/vendors/template/template.js"></script>
+<script src="/assets/vendors/bootstrappaginator/bootstrap-paginator.min.js"></script>
+<script src="/assets/js/admin/comment_list.js"></script>
+
+
+<%- include('./layouts/admin_footer.ejs'); %>
